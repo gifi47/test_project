@@ -5,18 +5,11 @@
 #include "Game/Game.h"
 
 int main(){
-    for (int i = 0; i < 100; i++) {
-        std:: cout << strlen(ReadFile("/home/gifi/CLionProjects/test_project/Game/Shaders/default.vert")) << "\n";
-    }
-    for (int i = 0; i < 100; i++) {
-        std:: cout << strlen(ReadFile("/home/gifi/CLionProjects/test_project/Game/Shaders/default.frag")) << "\n";
-    }
-    Shader sh = Shader("/home/gifi/CLionProjects/test_project/Game/Shaders/default");
-    /*Game game("Test game");
+    Game game("Test game");
     game.SetScreenSize(800, 600);
     game.Start();
     game.Init();
-    return game.Loop();*/
+    return game.Loop();
 }
 /*
 #include <iostream>
@@ -147,7 +140,8 @@ int main()
             0, 1, 3,  // First Triangle
             1, 2, 3   // Second Triangle
     };
-    Shader s = Shader("/home/gifi/CLionProjects/test_project/Game/Shaders/default");
+    Shader s = Shader();
+    s = Shader("/home/gifi/CLionProjects/test_project/Game/Shaders/default");
     //float* verts{new float[]{ 0.0f, 0.5f, 0.0f, 0.4f, -0.3f, 0.0f, -0.4f, -0.3f, 0.0f }};
     //u_int32_t* inds{new u_int32_t[]{0, 1, 2}};
     //Mesh m = Mesh(verts, 9, inds, 3);
@@ -202,6 +196,7 @@ int main()
         // Swap the screen buffers
         glfwSwapBuffers(window);
     }
+    s.Dispose();
     // Properly de-allocate all resources once they've outlived their purpose
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);

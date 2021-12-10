@@ -13,6 +13,7 @@
 class Chunk {
 public:
     Chunk();
+    Chunk(const Chunk& chunk);
     Chunk(u_int8_t size_x, u_int8_t size_y, u_int8_t size_z);
     ~Chunk();
     Mesh GenerateMesh();

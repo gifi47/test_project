@@ -31,3 +31,12 @@ int32_t Mesh::GetVertexesSize() const {
 int32_t Mesh::GetIndexesSize() const {
     return _indexes_size;
 }
+
+Mesh::Mesh(const Mesh& mesh) {
+    delete[] _vertexes;
+    delete[] _indexes;
+    _vertexes_size = mesh._vertexes_size;
+    _indexes_size = mesh._indexes_size;
+    _vertexes = (float*)memcpy(new float[_vertexes_size], mesh._vertexes, _vertexes_size * sizeof(float));
+    _indexes = (u_int32_t *)memcpy(new float[_indexes_size], mesh._indexes, _indexes_size * sizeof(u_int32_t));
+}

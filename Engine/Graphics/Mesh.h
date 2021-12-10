@@ -7,10 +7,12 @@
 
 
 #include <iostream>
+#include <cstring>
 
 class Mesh {
 public:
     Mesh();
+    Mesh(const Mesh& mesh);
     Mesh(float* vertexes, int32_t vertexes_size, u_int32_t* indexes, int32_t indexes_size);
 
     float* GetVertexes();

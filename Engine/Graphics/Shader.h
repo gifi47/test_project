@@ -12,9 +12,9 @@
 class Shader {
 public:
     Shader();
-    ~Shader();
     explicit Shader(const std::string& name);
     void Use() const;
+    void Dispose() const;
 
 private:
     GLuint _shader_program{};

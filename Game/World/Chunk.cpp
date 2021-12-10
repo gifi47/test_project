@@ -220,9 +220,15 @@ Mesh Chunk::GenerateMesh() {
         }
     }
     auto vertexes_cut = (float*)std::memcpy(new float[vertexes_count * 3], vertexes, vertexes_count * 3 * sizeof(float));
-    //delete[] vertexes;
+
+    delete[] vertexes;
+
     auto indexes_cut = (u_int32_t*)std::memcpy(new u_int32_t[index], indexes, index * sizeof(u_int32_t));
-    //delete[] indexes;
+    for (int i = 0; i < vertexes_count * 3; i++){
+        vertexes_cut[i] = (vertexes_cut[i] - 8.0f) * 0.1f;
+    }
+
+    delete[] indexes;
 
     std::cout << "success";
 
@@ -253,4 +259,13 @@ void Chunk::GenerateData() {
             }
         }
     }
+}
+
+Chunk::Chunk(const Chunk &chunk){
+    delete[] _data;
+    _size_x = chunk._size_x;
+    _size_y = chunk._size_y;
+    _size_z = chunk._size_z;
+    _data_size = _size_x * _size_y * _size_z;
+    _data = (u_int8_t*)memcpy(new u_int8_t[_data_size], chunk._data, _data_size * sizeof(u_int8_t));
 }
