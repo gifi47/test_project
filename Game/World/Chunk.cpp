@@ -7,10 +7,12 @@
 Chunk::Chunk(u_int8_t size_x, u_int8_t size_y, u_int8_t size_z):_size_x(size_x), _size_y(size_y), _size_z(size_z) {
     _data_size = size_x * size_y * size_z;
     _data = new u_int8_t[_data_size];
+    std::cout << "allocated " << _data << " at chunk " << this << " \n";
 }
 
 Chunk::Chunk() {
     _data = new u_int8_t[_data_size];
+    std::cout << "allocated " << _data << " at chunk " << this << " \n";
 }
 
 Mesh Chunk::GenerateMesh() {
@@ -244,6 +246,7 @@ void Chunk::SetTileType(u_int8_t x, u_int8_t y, u_int8_t z, u_int8_t tile_type) 
 }
 
 Chunk::~Chunk() {
+    std::cout << "deleted " << _data << " at chunk " << this << " \n";
     delete[] _data;
 }
 
@@ -262,10 +265,27 @@ void Chunk::GenerateData() {
 }
 
 Chunk::Chunk(const Chunk &chunk){
+    std::cout << "start copy\n";
+    std::cout << "deleted " << _data << " at chunk " << this << " \n";
     delete[] _data;
     _size_x = chunk._size_x;
     _size_y = chunk._size_y;
     _size_z = chunk._size_z;
     _data_size = _size_x * _size_y * _size_z;
     _data = (u_int8_t*)memcpy(new u_int8_t[_data_size], chunk._data, _data_size * sizeof(u_int8_t));
+    std::cout << "allocated " << _data << " at chunk " << this << " \nend copy\n";
+}
+
+Chunk &Chunk::operator=(const Chunk &chunk) {
+    if (this == &chunk) return (*this);
+    std::cout << "start copy\n";
+    std::cout << "deleted " << _data << " at chunk " << this << " \n";
+    delete[] _data;
+    _size_x = chunk._size_x;
+    _size_y = chunk._size_y;
+    _size_z = chunk._size_z;
+    _data_size = _size_x * _size_y * _size_z;
+    _data = (u_int8_t*)memcpy(new u_int8_t[_data_size], chunk._data, _data_size * sizeof(u_int8_t));
+    std::cout << "allocated " << _data << " at chunk " << this << " \nend copy\n";
+    return (*this);
 }

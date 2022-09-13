@@ -5,7 +5,7 @@
 #include "Shader.h"
 
 Shader::Shader(const std::string& name) {
-    std::cout << ReadFile(name + ".vert");
+    //std::cout << ReadFile(name + ".vert");
     const GLchar* vertex_shader_code{ReadFile(name + ".vert")};
 
     GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);

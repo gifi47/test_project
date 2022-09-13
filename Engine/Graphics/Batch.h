@@ -12,8 +12,9 @@
 class Batch {
 public:
     Batch();
+    Batch(const Batch& batch);
     explicit Batch(Mesh& mesh);
-    ~Batch();
+    void Dispose();
     void Render() const;
 private:
     GLuint _vertex_array_object{};

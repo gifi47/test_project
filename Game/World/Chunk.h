@@ -18,6 +18,8 @@ public:
     ~Chunk();
     Mesh GenerateMesh();
     void GenerateData();
+
+    Chunk& operator=(const Chunk& chunk);
 private:
     u_int32_t _data_size{};
     u_int8_t _size_x{};

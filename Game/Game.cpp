@@ -14,8 +14,12 @@ int8_t Game::Loop() {
         glfwSwapBuffers(_window);
     }
     shader.Dispose();
+    batch.Dispose();
+    std::cout << "window destroy\n";
     glfwDestroyWindow(_window);
+    std::cout << "glfwTerminate\n";
     glfwTerminate();
+    std::cout << "end of program\n";
     return 0;
 }
 
@@ -33,7 +37,7 @@ void Game::Init() {
     chunk.GenerateData();
     std::cout << "data generated\n";
     mesh = chunk.GenerateMesh();
-    std::cout << "mesh generated\n";
+    std::cout << "mesh " << (&mesh) << " generated\n";
     batch = Batch(mesh);
     std::cout << "batch created\n";
 }

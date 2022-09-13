@@ -43,18 +43,6 @@ void Batch::Render() const {
     glBindVertexArray(0);
 }
 
-Batch::~Batch() {
-    if (_vertex_array_object != 0) {
-        glDeleteBuffers(1, &_vertex_array_object);
-    }
-    if (_vertex_buffer_object != 0) {
-        glDeleteBuffers(1, &_vertex_buffer_object);
-    }
-    if (_element_buffer_object != 0) {
-        glDeleteBuffers(1, &_element_buffer_object);
-    }
-}
-
 Batch::Batch() {
     /*std::cout << "hd\n";
     GLfloat verts[] = {
@@ -84,4 +72,21 @@ Batch::Batch() {
 
     glBindVertexArray(0);
     std::cout << "hdend\n";*/
+}
+
+Batch::Batch(const Batch &batch) {
+    std::cout << "copy mesh data from " << (&batch) << " to " << (this) << "\n";
+    _vertex_array_object = batch._vertex_array_object;
+    _vertex_buffer_object = batch._vertex_buffer_object;
+    _element_buffer_object = batch._element_buffer_object;
+    _vertex_count = batch._vertex_count;
+    std::cout << "end copy\n";
+}
+
+void Batch::Dispose() {
+    std::cout << "dispose batch " << (this) << "\n";
+    glDeleteBuffers(1, &_vertex_array_object);
+    glDeleteBuffers(1, &_vertex_buffer_object);
+    glDeleteBuffers(1, &_element_buffer_object);
+    std::cout << "end dispose\n";
 }

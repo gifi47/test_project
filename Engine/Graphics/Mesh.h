@@ -20,6 +20,8 @@ public:
     int32_t GetVertexesSize() const;
     int32_t GetIndexesSize() const;
 
+    Mesh& operator=(const Mesh& mesh);
+
     ~Mesh();
 private:
     float* _vertexes{};

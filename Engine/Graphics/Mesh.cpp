@@ -12,8 +12,10 @@ Mesh::Mesh() {
 }
 
 Mesh::~Mesh() {
+    std::cout << "deconstructor mesh at " << (this) << "\n";
     delete[] _vertexes;
     delete[] _indexes;
+    std::cout << "end deconstructor\n";
 }
 
 u_int32_t* Mesh::GetIndexes() {
@@ -33,10 +35,25 @@ int32_t Mesh::GetIndexesSize() const {
 }
 
 Mesh::Mesh(const Mesh& mesh) {
+    std::cout << "copy mesh data from " << (&mesh) << " to " << (this) << "\n";
     delete[] _vertexes;
     delete[] _indexes;
     _vertexes_size = mesh._vertexes_size;
     _indexes_size = mesh._indexes_size;
     _vertexes = (float*)memcpy(new float[_vertexes_size], mesh._vertexes, _vertexes_size * sizeof(float));
     _indexes = (u_int32_t *)memcpy(new float[_indexes_size], mesh._indexes, _indexes_size * sizeof(u_int32_t));
+    std::cout << "end copy\n";
+}
+
+Mesh &Mesh::operator=(const Mesh& mesh) {
+    if (this == &mesh) return (*this);
+    std::cout << "copy mesh data from " << (&mesh) << " to " << (this) << "\n";
+    delete[] _vertexes;
+    delete[] _indexes;
+    _vertexes_size = mesh._vertexes_size;
+    _indexes_size = mesh._indexes_size;
+    _vertexes = (float*)memcpy(new float[_vertexes_size], mesh._vertexes, _vertexes_size * sizeof(float));
+    _indexes = (u_int32_t *)memcpy(new float[_indexes_size], mesh._indexes, _indexes_size * sizeof(u_int32_t));
+    std::cout << "end copy\n";
+    return (*this);
 }
